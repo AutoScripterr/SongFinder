@@ -1,0 +1,13 @@
+{
+  "name": "song-identifier-app",
+  "version": "1.0.0",
+  "description": "Song identifier from video URLs - TikTok, Instagram, YouTube",
+  "scripts": {
+    "install": "cd server && npm install",
+    "build": "cd server && npm run build",
+    "start": "cd server && npm start"
+  },
+  "keywords": ["song-identifier", "music-recognition", "tiktok", "instagram", "youtube"],
+  "author": "",
+  "license": "ISC"
+}
