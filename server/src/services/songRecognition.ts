@@ -71,12 +71,14 @@ export class SongRecognitionService {
    * Normalize AudD API response to our SongResult format
    */
   private normalizeSongData(data: NonNullable<AudDResponse['result']>): SongResult {
+    const albumArt = this.getAlbumArt(data);
+
     return {
       title: data.title,
       artist: data.artist,
-      album: data.album,
-      releaseDate: data.release_date,
-      albumArt: this.getAlbumArt(data),
+      ...(data.album && { album: data.album }),
+      ...(data.release_date && { releaseDate: data.release_date }),
+      ...(albumArt && { albumArt }),
       externalLinks: {
         ...(data.spotify?.external_urls?.spotify && { spotify: data.spotify.external_urls.spotify }),
         ...(data.apple_music?.url && { appleMusic: data.apple_music.url }),
