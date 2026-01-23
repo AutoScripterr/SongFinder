@@ -1,0 +1,20 @@
+🔑 CLAVE SSH PARA GITHUB - COPIA ESTO
+==========================================
+
+PASO 1: Copia toda esta clave (desde ssh-ed25519 hasta github-songfinder):
+
+ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILa3ckNyaWA8KQUET3Vi75NygXd5aiE66P4dGyWnOOk5 github-songfinder
+
+
+PASO 2: Ve a GitHub y agrega esta clave:
+
+1. Abre: https://github.com/settings/ssh/new
+2. En "Title" escribe: SongFinder Mac
+3. En "Key" pega la clave de arriba
+4. Click "Add SSH key"
+5. Confirma con tu contraseña de GitHub si te la pide
+
+
+PASO 3: ¡Listo! Cuando termines, dime "listo" y haré push del código automáticamente.
+
+==========================================
