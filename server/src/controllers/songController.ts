@@ -28,7 +28,7 @@ export class SongController {
       if (!validationResult.success) {
         res.status(400).json({
           success: false,
-          error: validationResult.error.errors[0]?.message || 'Invalid request',
+          error: validationResult.error.issues[0]?.message || 'Invalid request',
         } as IdentifyResponse);
         return;
       }

@@ -35,8 +35,8 @@ export class AudioAnalyzer {
       const meanVolumeMatch = output.match(/mean_volume:\s*([-\d.]+)\s*dB/);
       const maxVolumeMatch = output.match(/max_volume:\s*([-\d.]+)\s*dB/);
 
-      const meanVolume = meanVolumeMatch ? parseFloat(meanVolumeMatch[1]) : -100;
-      const maxVolume = maxVolumeMatch ? parseFloat(maxVolumeMatch[1]) : -100;
+      const meanVolume = meanVolumeMatch?.[1] ? parseFloat(meanVolumeMatch[1]) : -100;
+      const maxVolume = maxVolumeMatch?.[1] ? parseFloat(maxVolumeMatch[1]) : -100;
 
       // Detect silence ratio
       const silenceCommand = `${ffmpegPath} -i "${audioPath}" -af "silencedetect=noise=-30dB:d=0.5" -f null - 2>&1`;

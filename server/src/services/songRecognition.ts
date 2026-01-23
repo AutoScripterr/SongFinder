@@ -78,9 +78,9 @@ export class SongRecognitionService {
       releaseDate: data.release_date,
       albumArt: this.getAlbumArt(data),
       externalLinks: {
-        spotify: data.spotify?.external_urls?.spotify,
-        appleMusic: data.apple_music?.url,
-        youtube: data.song_link,
+        ...(data.spotify?.external_urls?.spotify && { spotify: data.spotify.external_urls.spotify }),
+        ...(data.apple_music?.url && { appleMusic: data.apple_music.url }),
+        ...(data.song_link && { youtube: data.song_link }),
       },
     };
   }
