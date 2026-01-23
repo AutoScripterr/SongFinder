@@ -5,10 +5,10 @@
     "nixpacksPlan": {
       "phases": {
         "setup": {
-          "nixPkgs": ["nodejs_20", "python3", "ffmpeg"]
+          "nixPkgs": ["nodejs_20", "python3", "python3Packages.pip", "ffmpeg", "yt-dlp"]
         },
         "install": {
-          "cmds": ["python3 -m pip install --user yt-dlp", "npm install"]
+          "cmds": ["npm install"]
         },
         "build": {
           "cmds": ["npm run build"]
