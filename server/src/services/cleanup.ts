@@ -22,6 +22,9 @@ export class CleanupService {
    */
   async cleanupOldFiles(olderThanMinutes: number = 60): Promise<void> {
     try {
+      // Create temp directory if it doesn't exist
+      await fs.mkdir(TEMP_DIR, { recursive: true });
+
       const files = await fs.readdir(TEMP_DIR);
       const now = Date.now();
       const maxAge = olderThanMinutes * 60 * 1000; // Convert to milliseconds

@@ -20,6 +20,9 @@ export class AudioExtractor {
       throw new Error('Invalid URL provided');
     }
 
+    // Ensure temp directory exists
+    await fs.mkdir(TEMP_DIR, { recursive: true });
+
     // Generate unique filename
     const filename = `${Date.now()}-${uuidv4()}.mp3`;
     const outputPath = path.join(TEMP_DIR, filename);
