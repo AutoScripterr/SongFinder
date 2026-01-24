@@ -23,17 +23,17 @@ export function FAQ() {
   ];
 
   return (
-    <div className="mt-16 max-w-3xl mx-auto">
-      <h2 className="text-3xl font-bold text-center text-gray-900 mb-8">
+    <div className="mt-12 md:mt-16 max-w-3xl mx-auto px-4">
+      <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6 md:mb-8">
         Frequently Asked Questions
       </h2>
-      <div className="space-y-6">
+      <div className="space-y-4 md:space-y-5">
         {faqs.map((faq, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-2">
+          <div key={index} className="glass-card p-5 md:p-6 hover-lift">
+            <h3 className="text-base md:text-lg font-semibold text-white mb-2 md:mb-3">
               {faq.question}
             </h3>
-            <p className="text-gray-700">
+            <p className="text-sm md:text-base" style={{color: 'var(--text-secondary)'}}>
               {faq.answer}
             </p>
           </div>
@@ -41,13 +41,13 @@ export function FAQ() {
       </div>
 
       {/* SEO Footer Text */}
-      <div className="mt-12 text-center text-sm text-gray-600 max-w-2xl mx-auto">
-        <p className="mb-4">
-          <strong>Song Identifier Tool</strong> - The best free online tool to identify songs from any video.
+      <div className="mt-10 md:mt-12 text-center text-xs md:text-sm max-w-2xl mx-auto" style={{color: 'var(--text-disabled)'}}>
+        <p className="mb-3 md:mb-4 leading-relaxed">
+          <strong className="text-white">Song Identifier Tool</strong> - The best free online tool to identify songs from any video.
           Find music from TikTok videos, Instagram Reels, YouTube clips, and over 1000 other platforms instantly.
           No registration required, completely free, and works on all devices.
         </p>
-        <p>
+        <p className="leading-relaxed">
           Popular searches: tiktok song finder, instagram reel music finder, youtube song identifier,
           what song is this, identify song from video, find song name from video, music recognition tool
         </p>

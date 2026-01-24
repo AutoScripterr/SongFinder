@@ -6,12 +6,13 @@ interface ErrorMessageProps {
 
 export function ErrorMessage({ message, onRetry, suggestions }: ErrorMessageProps) {
   return (
-    <div className="max-w-2xl mx-auto mt-8">
-      <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-        <div className="flex items-start">
+    <div className="max-w-2xl mx-auto mt-6 md:mt-8 px-4">
+      <div className="glass-card border-red-500/30 p-5 md:p-6" style={{background: 'rgba(239, 68, 68, 0.05)'}}>
+        <div className="flex items-start gap-3 md:gap-4">
           <div className="flex-shrink-0">
             <svg
-              className="h-6 w-6 text-red-600"
+              className="h-5 w-5 md:h-6 md:w-6"
+              style={{color: '#EF4444'}}
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -24,14 +25,14 @@ export function ErrorMessage({ message, onRetry, suggestions }: ErrorMessageProp
               />
             </svg>
           </div>
-          <div className="ml-3 flex-1">
-            <h3 className="text-sm font-medium text-red-800">Song Not Found</h3>
-            <p className="mt-2 text-sm text-red-700">{message}</p>
+          <div className="flex-1">
+            <h3 className="text-sm md:text-base font-semibold text-white mb-2">Song Not Found</h3>
+            <p className="text-sm md:text-base" style={{color: 'var(--text-secondary)'}}>{message}</p>
 
             {suggestions && suggestions.length > 0 && (
-              <div className="mt-4">
-                <h4 className="text-sm font-medium text-red-800 mb-2">💡 Suggestions:</h4>
-                <ul className="list-disc list-inside space-y-1 text-sm text-red-700">
+              <div className="mt-4 md:mt-5">
+                <h4 className="text-xs md:text-sm font-semibold text-white mb-2">💡 Suggestions:</h4>
+                <ul className="list-disc list-inside space-y-1.5 text-xs md:text-sm" style={{color: 'var(--text-secondary)'}}>
                   {suggestions.map((suggestion, index) => (
                     <li key={index}>{suggestion}</li>
                   ))}
@@ -41,7 +42,11 @@ export function ErrorMessage({ message, onRetry, suggestions }: ErrorMessageProp
 
             <button
               onClick={onRetry}
-              className="mt-4 bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors"
+              className="mt-5 md:mt-6 px-5 md:px-6 py-2.5 md:py-3 rounded-xl font-semibold text-sm md:text-base text-white transition-all hover-lift"
+              style={{
+                background: 'linear-gradient(135deg, #EF4444 0%, #DC2626 100%)',
+                boxShadow: '0 4px 16px rgba(239, 68, 68, 0.3)'
+              }}
             >
               Try Another Video
             </button>
