@@ -1,127 +1,181 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+  <meta charset="UTF-8" />
+  <title>Identify Any Song From Any Video | Free Song Finder</title>
+  <meta name="description" content="Paste a TikTok, Instagram or YouTube video link and identify the song in under 30 seconds. Free, fast, no signup." />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <!-- Google Search Console Verification -->
-    <meta name="google-site-verification" content="34da903gTWQnSq_qDHO9yrjky8cch3eHxr8gT0nIejc" />
+  <!-- Google Search Console Verification -->
+  <meta name="google-site-verification" content="34da903gTWQnSq_qDHO9yrjky8cch3eHxr8gT0nIejc" />
 
-    <!-- Performance Optimization -->
-    <meta name="theme-color" content="#3b82f6" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://api.audd.io" />
-    <link rel="dns-prefetch" href="https://api.audd.io" />
-
-    <!-- Primary SEO Tags -->
-    <title>Identify Songs from Any Video - Free TikTok, Instagram, YouTube Song Finder</title>
-    <meta name="description" content="Instantly identify songs from TikTok, Instagram, YouTube videos. Free online tool - just paste the video URL and discover the music. Works with 1000+ platforms." />
-    <meta name="keywords" content="song identifier, find song from video, tiktok song finder, instagram music finder, youtube song identifier, identify song from reel, what song is this, music recognition" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Identify Songs from Any Video - Free Song Finder Tool" />
-    <meta property="og:description" content="Instantly identify songs from TikTok, Instagram, YouTube videos. Free and works with 1000+ platforms." />
-    <meta property="og:url" content="https://song-finder-iota.vercel.app" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Identify Songs from Any Video - Free Song Finder" />
-    <meta name="twitter:description" content="Find any song from TikTok, Instagram, YouTube videos instantly. Free online tool." />
-
-    <!-- Additional Meta Tags -->
-    <meta name="robots" content="index, follow" />
-    <meta name="author" content="Song Identifier App" />
-    <meta name="language" content="English" />
-    <link rel="canonical" href="https://song-finder-iota.vercel.app" />
-
-    <!-- Schema.org JSON-LD for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebApplication",
-      "name": "Song Identifier from Video",
-      "description": "Identify songs from any video URL - TikTok, Instagram, YouTube and 1000+ platforms",
-      "url": "https://song-finder-iota.vercel.app",
-      "applicationCategory": "MultimediaApplication",
-      "operatingSystem": "Web Browser",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.8",
-        "ratingCount": "1250",
-        "bestRating": "5",
-        "worstRating": "1"
-      },
-      "featureList": [
-        "Identify songs from TikTok videos",
-        "Find music in Instagram Reels",
-        "YouTube video song recognition",
-        "Works with 1000+ platforms",
-        "Instant results",
-        "Free to use"
-      ]
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #ffffff;
     }
-    </script>
-
-    <!-- FAQ Schema for Rich Snippets -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "How do I identify a song from a TikTok video?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Simply copy the TikTok video URL, paste it into our song identifier tool, and click 'Identify Song'. Our system will analyze the audio and tell you the song name, artist, and provide links to listen on Spotify and Apple Music."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Is this song finder free to use?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Our song identifier is completely free. You can identify songs from TikTok, Instagram, YouTube, and over 1000 other platforms without any cost."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What video platforms are supported?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "We support over 1000 platforms including TikTok, Instagram Reels, YouTube, Vimeo, Facebook, Twitter, and many more. If it's a video URL, we can likely identify the music."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How accurate is the song identification?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Our tool uses advanced audio recognition technology with access to millions of songs. We try multiple segments of the video to ensure the best match, giving you accurate results for most popular music."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Can I identify songs from Instagram Reels?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes! Instagram Reels are fully supported. Just copy the Reel URL and paste it into our tool to instantly identify the background music."
-          }
-        }
-      ]
+    input, button {
+      font-family: inherit;
     }
-    </script>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    button:hover { transform: translateY(-1px); }
+    button:active { transform: translateY(0); }
+
+    .hidden { display: none; }
+
+    @media (max-width: 640px) {
+      h1 { font-size: 2.1rem !important; }
+      .stats { grid-template-columns: 1fr !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root">
+<!-- Background -->
+<div style="position:fixed; inset:0; z-index:-1;">
+  <div style="position:absolute; inset:0; background:linear-gradient(135deg, rgba(147,51,234,0.18), transparent, rgba(236,72,153,0.18));"></div>
+  <div style="position:absolute; top:20%; left:20%; width:320px; height:320px; background:rgba(139,92,246,0.12); border-radius:50%; filter:blur(60px);"></div>
+  <div style="position:absolute; bottom:20%; right:20%; width:320px; height:320px; background:rgba(236,72,153,0.12); border-radius:50%; filter:blur(60px);"></div>
+</div>
+
+<!-- Main -->
+<div style="min-height:100vh; padding:40px 16px;">
+  <div style="max-width:1200px; margin:0 auto;">
+
+    <!-- HERO -->
+    <div style="max-width:720px; margin:0 auto; text-align:center;">
+
+      <!-- Logo -->
+      <div style="margin-bottom:24px;">
+        <div style="width:80px; height:80px; margin:0 auto; border-radius:50%; background:linear-gradient(135deg,#a855f7,#ec4899); display:flex; align-items:center; justify-content:center; box-shadow:0 20px 40px rgba(0,0,0,0.5);">
+          <span style="font-size:36px;">🎵</span>
+        </div>
+      </div>
+
+      <!-- Headline -->
+      <h1 style="font-size:2.6rem; font-weight:800; line-height:1.1; margin-bottom:16px;">
+        Identify Any Song<br>
+        <span style="background:linear-gradient(135deg,#8B5CF6,#EC4899); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">
+          From Any Video
+        </span>
+      </h1>
+
+      <!-- Subheadline -->
+      <p style="font-size:1.1rem; color:#B3B3B3; margin-bottom:32px;">
+        Paste a TikTok, Instagram or YouTube link.<br>
+        <strong style="color:#fff;">Get the song name in under 30 seconds.</strong>
+      </p>
+
+      <!-- FORM -->
+      <form id="songForm" style="display:flex; flex-direction:column; gap:16px;">
+
+        <div style="background:rgba(255,255,255,0.06); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,0.12); border-radius:16px; padding:6px;">
+          <input
+            id="videoUrl"
+            type="url"
+            required
+            placeholder="🔗 Paste video URL here…"
+            style="width:100%; padding:22px 18px; background:transparent; border:none; outline:none; color:#fff; font-size:1.1rem;"
+          />
+        </div>
+
+        <button
+          id="submitBtn"
+          type="submit"
+          style="width:100%; padding:20px 32px; border-radius:16px; font-size:1.25rem; font-weight:800; background:linear-gradient(135deg,#1E88E5,#42A5F5); color:#fff; border:none; cursor:pointer; box-shadow:0 12px 32px rgba(30,136,229,0.45);"
+        >
+          🔍 Find Song Now
+        </button>
+
+        <div style="font-size:0.85rem; color:#9CA3AF;">
+          No signup • 100% free • Works instantly
+        </div>
+      </form>
+
+      <!-- Loading -->
+      <div id="loading" class="hidden" style="margin-top:24px; font-size:1rem;">
+        ⏳ Analyzing audio…
+      </div>
+
+      <!-- Result -->
+      <div id="result" class="hidden" style="margin-top:24px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); border-radius:16px; padding:20px;">
+        <strong>🎶 Song Found:</strong>
+        <div id="songData" style="margin-top:8px;"></div>
+      </div>
+
+      <!-- Error -->
+      <div id="error" class="hidden" style="margin-top:24px; color:#F87171;">
+        ❌ Could not identify the song. Try another video.
+      </div>
+
+      <!-- Platforms -->
+      <div style="margin-top:32px; display:flex; flex-wrap:wrap; justify-content:center; gap:10px; font-size:0.85rem; color:#B3B3B3;">
+        <span style="padding:6px 14px; border-radius:999px; background:rgba(255,255,255,0.06);">📱 TikTok</span>
+        <span style="padding:6px 14px; border-radius:999px; background:rgba(255,255,255,0.06);">📷 Instagram</span>
+        <span style="padding:6px 14px; border-radius:999px; background:rgba(255,255,255,0.06);">▶️ YouTube</span>
+        <span style="padding:6px 14px; border-radius:999px; background:rgba(255,255,255,0.06);">+1000 platforms</span>
+      </div>
+
+      <!-- Stats -->
+      <div class="stats" style="margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:14px;">
+        <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:12px;">
+          <div style="font-size:1.5rem; font-weight:700;">100% Free</div>
+          <div style="font-size:0.8rem; color:#B3B3B3;">No signup</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:12px;">
+          <div style="font-size:1.5rem; font-weight:700;">&lt; 30s</div>
+          <div style="font-size:0.8rem; color:#B3B3B3;">Average result</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:12px;">
+          <div style="font-size:1.5rem; font-weight:700;">1000+</div>
+          <div style="font-size:0.8rem; color:#B3B3B3;">Platforms</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- FAQ -->
+    <div style="margin-top:80px; max-width:720px; margin-inline:auto;">
+      <h2 style="text-align:center; margin-bottom:24px;">FAQ</h2>
+
+      <details style="margin-bottom:12px;">
+        <summary>Is this free?</summary>
+        <p>Yes. No signup, no limits.</p>
+      </details>
+
+      <details style="margin-bottom:12px;">
+        <summary>Which platforms are supported?</summary>
+        <p>TikTok, Instagram Reels, YouTube and over 1000 more.</p>
+      </details>
+
+      <details>
+        <summary>How accurate is it?</summary>
+        <p>We analyze multiple audio segments for best match.</p>
+      </details>
+    </div>
+
+    <!-- CTA FINAL -->
+    <div style="margin-top:80px; text-align:center;">
+      <h2 style="font-size:2rem; font-weight:800; margin-bottom:16px;">
+        Ready to find your song?
+      </h2>
+      <button onclick="document.getElementById('videoUrl').focus();" style="padding:18px 36px; font-size:1.2rem; font-weight:800; border-radius:16px; background:linear-gradient(135deg,#8B5CF6,#EC4899); color:#fff; border:none; cursor:pointer;">
+        Find Song Now
+      </button>
+    </div>
+
+  </div>
+</div>
+
+</div>
+<!-- End root -->
+
+<!-- Real API Integration -->
+<script type="module" src="/src/main.tsx"></script>
+
+</body>
 </html>
