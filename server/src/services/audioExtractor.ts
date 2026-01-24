@@ -34,10 +34,15 @@ export class AudioExtractor {
       // Extract 30 seconds of audio as MP3 from specified start time
       // -x: Extract audio
       // --audio-format mp3: Convert to MP3
-      // --postprocessor-args: FFmpeg args to extract segment
+      // --postprocessor-args: FFmpeg args to extract segment and reduce voice
+      // Audio filters:
+      // - highpass/lowpass: Remove extreme frequencies
+      // - equalizer: Reduce voice frequency range (200-3500Hz) by 8dB
+      // - afftdn: Adaptive noise reduction to eliminate speech
       const ytDlpPath = process.env.YT_DLP_PATH || '/Users/oscmm/Library/Python/3.14/bin/yt-dlp';
       const ffmpegPath = process.env.FFMPEG_PATH || '/Users/oscmm/.local/bin/ffmpeg';
-      const command = `${ytDlpPath} --ffmpeg-location "${ffmpegPath}" -x --audio-format mp3 --postprocessor-args "ffmpeg:-ss ${startTime} -t 30" -o "${outputPath}" "${this.sanitizeUrl(videoUrl)}"`;
+      const audioFilters = 'highpass=f=80,lowpass=f=16000,equalizer=f=1500:width_type=h:width=3000:g=-8,afftdn=nf=-25';
+      const command = `${ytDlpPath} --ffmpeg-location "${ffmpegPath}" -x --audio-format mp3 --postprocessor-args "ffmpeg:-ss ${startTime} -t 30 -af ${audioFilters}" -o "${outputPath}" "${this.sanitizeUrl(videoUrl)}"`;
 
       // Execute with 5-minute timeout
       await execPromise(command, { timeout: 300000 });

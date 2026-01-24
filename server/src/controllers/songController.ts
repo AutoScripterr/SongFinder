@@ -37,8 +37,9 @@ export class SongController {
 
       console.log(`Processing video URL: ${url}`);
 
-      // Try multiple segments: beginning (0s) and middle (15s)
-      const segments = [0, 15];
+      // Try multiple segments to find clearest music
+      // More segments = better chance to find part with less speech
+      const segments = [0, 10, 20, 30];
       let songData = null;
 
       for (const startTime of segments) {
