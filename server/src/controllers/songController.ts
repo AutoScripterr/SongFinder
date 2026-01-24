@@ -37,9 +37,9 @@ export class SongController {
 
       console.log(`Processing video URL: ${url}`);
 
-      // Try multiple segments to find clearest music
-      // More segments = better chance to find part with less speech
-      const segments = [0, 10, 20, 30];
+      // Try multiple segments from different parts of the video
+      // Typically music is clearest at the start or middle of short videos
+      const segments = [0, 15]; // Start and 15s in
       let songData = null;
 
       for (const startTime of segments) {
@@ -50,14 +50,7 @@ export class SongController {
           audioPaths.push(audioPath);
           console.log(`Audio extracted to: ${audioPath}`);
 
-          // Step 2: Analyze audio characteristics (only once)
-          if (!audioAnalysis) {
-            console.log('Analyzing audio...');
-            audioAnalysis = await audioAnalyzer.analyzeAudio(audioPath);
-            console.log(`Audio analysis: music-like=${audioAnalysis.hasMusicLikeCharacteristics}, confidence=${audioAnalysis.confidence}`);
-          }
-
-          // Step 3: Try to identify song
+          // Step 2: Try to identify song immediately (skip analysis for speed)
           console.log('Identifying song...');
           songData = await songRecognition.identifySong(audioPath);
           console.log(`Song identified: ${songData.artist} - ${songData.title}`);
@@ -94,32 +87,14 @@ export class SongController {
 
       // Special handling for "no match" errors - provide helpful suggestions
       if (errorMessage === 'NO_MATCH') {
-        let errorMsg = 'Song not found in our database';
-        let suggestions: string[] = [];
-
-        // Provide different feedback based on audio analysis
-        if (audioAnalysis && !audioAnalysis.hasMusicLikeCharacteristics) {
-          errorMsg = 'No music detected in this video';
-          suggestions = [
-            'This video appears to contain only background noise or speech',
-            'Try a video with clear, recognizable music playing',
-            'Music should be the primary audio, not background sound',
-            'Look for music videos, concerts, or videos with prominent songs'
-          ];
-        } else {
-          // Music detected but not recognized - provide recommendations
-          errorMsg = 'Music detected but not identified (tried multiple segments)';
-          suggestions = [
-            'This might be ambient, lofi, or trending social media music',
-            '---',
-            ...musicRecommendations.formatRecommendationsAsSuggestions(true)
-          ];
-        }
-
         res.status(200).json({
           success: false,
-          error: errorMsg,
-          suggestions,
+          error: 'Could not identify the song in this video',
+          suggestions: [
+            'Try a video with clearer music',
+            'The song might be too new or not in our database',
+            'Background music in videos with lots of talking is harder to identify'
+          ],
         } as IdentifyResponse);
         return;
       }

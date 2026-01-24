@@ -31,17 +31,14 @@ export class AudioExtractor {
       // Ensure temp directory exists
       await fs.mkdir(TEMP_DIR, { recursive: true });
 
-      // Extract 30 seconds of audio as MP3 from specified start time
-      // -x: Extract audio
+      // Extract audio as MP3 from specified start time
+      // -x: Extract audio only
       // --audio-format mp3: Convert to MP3
-      // --postprocessor-args: FFmpeg args to extract segment and reduce voice
-      // Audio filters:
-      // - highpass/lowpass: Remove extreme frequencies
-      // - equalizer: Reduce voice frequency range (200-3500Hz) by 8dB
-      // - afftdn: Adaptive noise reduction to eliminate speech
+      // --audio-quality 0: Best quality (important for recognition)
+      // --postprocessor-args: FFmpeg args to extract 60 second segment
+      // We remove aggressive voice filters to preserve music quality
       const ytDlpPath = process.env.YT_DLP_PATH || 'yt-dlp';
-      const audioFilters = 'highpass=f=80,lowpass=f=16000,equalizer=f=1500:width_type=h:width=3000:g=-8,afftdn=nf=-25';
-      const command = `${ytDlpPath} -x --audio-format mp3 --postprocessor-args "ffmpeg:-ss ${startTime} -t 30 -af ${audioFilters}" -o "${outputPath}" "${this.sanitizeUrl(videoUrl)}"`;
+      const command = `${ytDlpPath} -x --audio-format mp3 --audio-quality 0 --postprocessor-args "ffmpeg:-ss ${startTime} -t 60" -o "${outputPath}" "${this.sanitizeUrl(videoUrl)}"`;
 
       // Execute with 5-minute timeout
       await execPromise(command, { timeout: 300000 });
