@@ -4,7 +4,7 @@ interface ErrorMessageProps {
   suggestions?: string[];
 }
 
-export function ErrorMessage({ message, onRetry }: ErrorMessageProps) {
+export function ErrorMessage({ onRetry }: ErrorMessageProps) {
   return (
     <div style={{ marginTop: '24px', color: '#F87171', textAlign: 'center' }}>
       ❌ Could not identify the song. Try another video.
