@@ -19,8 +19,8 @@ export function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
     <div className="w-full max-w-3xl mx-auto text-center px-4">
       {/* Logo/Icon with animation */}
       <div className="mb-8 inline-block relative">
-        <div className="w-20 h-20 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-2xl hover-lift">
-          <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-2xl hover-lift">
+          <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
           </svg>
         </div>
@@ -31,7 +31,7 @@ export function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
         <span className="gradient-text">Song Identifier</span>
       </h1>
 
-      <p className="text-lg mb-10 max-w-2xl mx-auto" style={{color: 'var(--text-secondary)'}}>
+      <p className="text-lg mb-12 max-w-2xl mx-auto" style={{color: 'var(--text-secondary)'}}>
         Find any song from <span className="text-white font-semibold">TikTok, YouTube, Instagram</span> videos
       </p>
 
@@ -43,7 +43,7 @@ export function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             placeholder="🔗 Paste video URL here..."
-            className="w-full px-6 py-4 bg-transparent text-white placeholder-gray-400 text-lg outline-none"
+            className="w-full px-6 py-5 bg-transparent text-white placeholder-gray-400 text-lg outline-none"
             style={{caretColor: 'var(--primary)'}}
             disabled={isLoading}
             required
@@ -55,7 +55,7 @@ export function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
         <button
           type="submit"
           disabled={isLoading || !url.trim()}
-          className="relative w-full py-4 px-8 rounded-xl font-bold text-lg overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover-lift"
+          className="relative w-full py-4 px-8 rounded-2xl font-bold text-lg overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover-lift"
           style={{
             background: isLoading || !url.trim()
               ? 'var(--surface-elevated)'
@@ -91,7 +91,7 @@ export function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
       </form>
 
       {/* Platform badges */}
-      <div className="mt-12 flex flex-wrap justify-center gap-3 text-sm" style={{color: 'var(--text-secondary)'}}>
+      <div className="mt-16 flex flex-wrap justify-center gap-3 text-sm" style={{color: 'var(--text-secondary)'}}>
         <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card float-animation">
           <span>📱</span>
           <span>TikTok</span>
@@ -112,15 +112,15 @@ export function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
 
       {/* Quick stats */}
       <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 text-center max-w-3xl mx-auto">
-        <div className="glass-card p-6 rounded-xl hover-lift">
+        <div className="glass-card p-8 rounded-xl hover-lift">
           <div className="text-3xl font-bold gradient-text mb-2">100% Free</div>
           <div className="text-sm" style={{color: 'var(--text-secondary)'}}>No signup required</div>
         </div>
-        <div className="glass-card p-6 rounded-xl hover-lift">
+        <div className="glass-card p-8 rounded-xl hover-lift">
           <div className="text-3xl font-bold gradient-text mb-2">&lt; 30s</div>
           <div className="text-sm" style={{color: 'var(--text-secondary)'}}>Average identification time</div>
         </div>
-        <div className="glass-card p-6 rounded-xl hover-lift">
+        <div className="glass-card p-8 rounded-xl hover-lift">
           <div className="text-3xl font-bold gradient-text mb-2">1000+</div>
           <div className="text-sm" style={{color: 'var(--text-secondary)'}}>Platforms supported</div>
         </div>

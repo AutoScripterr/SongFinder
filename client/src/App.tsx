@@ -46,7 +46,7 @@ function App() {
 
         {/* Always show FAQ for SEO */}
         {(state.status === 'idle' || state.status === 'error') && (
-          <div className="mt-12 md:mt-16 lg:mt-20 fade-in">
+          <div className="mt-20 fade-in">
             <FAQ />
           </div>
         )}
