@@ -16,113 +16,130 @@ export function UrlInput({ onSubmit, isLoading }: UrlInputProps) {
   };
 
   return (
-    <div className="w-full max-w-3xl mx-auto text-center px-4">
-      {/* Logo/Icon with animation */}
-      <div className="mb-8 inline-block relative">
-        <div className="w-24 h-24 mx-auto rounded-full bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center shadow-2xl hover-lift">
-          <svg className="w-12 h-12 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3" />
-          </svg>
+    <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
+      {/* Logo */}
+      <div style={{ marginBottom: '24px' }}>
+        <div style={{
+          width: '80px',
+          height: '80px',
+          margin: '0 auto',
+          borderRadius: '50%',
+          background: 'linear-gradient(135deg, #a855f7, #ec4899)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.5)'
+        }}>
+          <span style={{ fontSize: '36px' }}>🎵</span>
         </div>
       </div>
 
-      {/* Title with gradient */}
-      <h1 className="text-4xl md:text-5xl font-bold mb-4">
-        <span className="gradient-text">Song Identifier</span>
+      {/* Headline */}
+      <h1 style={{ fontSize: '2.6rem', fontWeight: 800, lineHeight: 1.1, marginBottom: '16px' }}>
+        Identify Any Song<br />
+        <span style={{
+          background: 'linear-gradient(135deg, #8B5CF6, #EC4899)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>
+          From Any Video
+        </span>
       </h1>
 
-      <p className="text-lg mb-12 max-w-2xl mx-auto" style={{color: 'var(--text-secondary)'}}>
-        Find any song from <span className="text-white font-semibold">TikTok, YouTube, Instagram</span> videos
+      {/* Subheadline */}
+      <p style={{ fontSize: '1.1rem', color: '#B3B3B3', marginBottom: '32px' }}>
+        Paste a TikTok, Instagram or YouTube link.<br />
+        <strong style={{ color: '#fff' }}>Get the song name in under 30 seconds.</strong>
       </p>
 
-      {/* Input Form with Glassmorphism */}
-      <form onSubmit={handleSubmit} className="space-y-4 max-w-2xl mx-auto">
-        <div className="glass-card p-1.5 hover-lift">
+      {/* FORM */}
+      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div style={{
+          background: 'rgba(255,255,255,0.06)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(255,255,255,0.12)',
+          borderRadius: '16px',
+          padding: '6px'
+        }}>
           <input
             type="url"
             value={url}
             onChange={(e) => setUrl(e.target.value)}
-            placeholder="🔗 Paste video URL here..."
-            className="w-full px-6 py-5 bg-transparent text-white placeholder-gray-400 text-lg outline-none"
-            style={{caretColor: 'var(--primary)'}}
-            disabled={isLoading}
             required
+            placeholder="🔗 Paste video URL here…"
+            disabled={isLoading}
             autoFocus
+            style={{
+              width: '100%',
+              padding: '22px 18px',
+              background: 'transparent',
+              border: 'none',
+              outline: 'none',
+              color: '#fff',
+              fontSize: '1.1rem'
+            }}
           />
         </div>
 
-        {/* Shazam-style Big Button */}
         <button
           type="submit"
           disabled={isLoading || !url.trim()}
-          className="relative w-full py-4 px-8 rounded-2xl font-bold text-lg overflow-hidden group disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 hover-lift"
           style={{
-            background: isLoading || !url.trim()
-              ? 'var(--surface-elevated)'
-              : 'linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%)',
-            color: 'white',
-            boxShadow: isLoading || !url.trim()
-              ? 'none'
-              : '0 8px 32px rgba(30, 136, 229, 0.4)'
+            width: '100%',
+            padding: '20px 32px',
+            borderRadius: '16px',
+            fontSize: '1.25rem',
+            fontWeight: 800,
+            background: isLoading || !url.trim() ? '#282828' : 'linear-gradient(135deg, #1E88E5, #42A5F5)',
+            color: '#fff',
+            border: 'none',
+            cursor: isLoading || !url.trim() ? 'not-allowed' : 'pointer',
+            boxShadow: isLoading || !url.trim() ? 'none' : '0 12px 32px rgba(30,136,229,0.45)',
+            opacity: isLoading || !url.trim() ? 0.5 : 1
           }}
         >
-          {/* Shine effect on hover */}
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] group-hover:translate-x-[200%] transition-transform duration-700"></div>
-
-          <span className="relative flex items-center justify-center gap-3">
-            {isLoading ? (
-              <>
-                <svg className="animate-spin h-5 w-5" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Analyzing...
-              </>
-            ) : (
-              <>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-                Identify Song
-              </>
-            )}
-          </span>
+          {isLoading ? '⏳ Analyzing audio…' : '🔍 Find Song Now'}
         </button>
+
+        <div style={{ fontSize: '0.85rem', color: '#9CA3AF' }}>
+          No signup • 100% free • Works instantly
+        </div>
       </form>
 
-      {/* Platform badges */}
-      <div className="mt-16 flex flex-wrap justify-center gap-3 text-sm" style={{color: 'var(--text-secondary)'}}>
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card float-animation">
-          <span>📱</span>
-          <span>TikTok</span>
-        </div>
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card float-animation" style={{animationDelay: '0.2s'}}>
-          <span>📷</span>
-          <span>Instagram</span>
-        </div>
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card float-animation" style={{animationDelay: '0.4s'}}>
-          <span>▶️</span>
-          <span>YouTube</span>
-        </div>
-        <div className="flex items-center gap-2 px-4 py-2 rounded-full glass-card float-animation" style={{animationDelay: '0.6s'}}>
-          <span>🌐</span>
-          <span>1000+ more</span>
-        </div>
+      {/* Platforms */}
+      <div style={{
+        marginTop: '32px',
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '10px',
+        fontSize: '0.85rem',
+        color: '#B3B3B3'
+      }}>
+        <span style={{ padding: '6px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.06)' }}>📱 TikTok</span>
+        <span style={{ padding: '6px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.06)' }}>📷 Instagram</span>
+        <span style={{ padding: '6px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.06)' }}>▶️ YouTube</span>
+        <span style={{ padding: '6px 14px', borderRadius: '999px', background: 'rgba(255,255,255,0.06)' }}>+1000 platforms</span>
       </div>
 
-      {/* Quick stats */}
-      <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 text-center max-w-3xl mx-auto">
-        <div className="glass-card p-8 rounded-xl hover-lift">
-          <div className="text-3xl font-bold gradient-text mb-2">100% Free</div>
-          <div className="text-sm" style={{color: 'var(--text-secondary)'}}>No signup required</div>
+      {/* Stats */}
+      <div style={{
+        marginTop: '40px',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, 1fr)',
+        gap: '14px'
+      }}>
+        <div style={{ background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '12px' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>100% Free</div>
+          <div style={{ fontSize: '0.8rem', color: '#B3B3B3' }}>No signup</div>
         </div>
-        <div className="glass-card p-8 rounded-xl hover-lift">
-          <div className="text-3xl font-bold gradient-text mb-2">&lt; 30s</div>
-          <div className="text-sm" style={{color: 'var(--text-secondary)'}}>Average identification time</div>
+        <div style={{ background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '12px' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>&lt; 30s</div>
+          <div style={{ fontSize: '0.8rem', color: '#B3B3B3' }}>Average result</div>
         </div>
-        <div className="glass-card p-8 rounded-xl hover-lift">
-          <div className="text-3xl font-bold gradient-text mb-2">1000+</div>
-          <div className="text-sm" style={{color: 'var(--text-secondary)'}}>Platforms supported</div>
+        <div style={{ background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '12px' }}>
+          <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>1000+</div>
+          <div style={{ fontSize: '0.8rem', color: '#B3B3B3' }}>Platforms</div>
         </div>
       </div>
     </div>

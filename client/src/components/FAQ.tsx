@@ -1,57 +1,22 @@
 export function FAQ() {
-  const faqs = [
-    {
-      question: "How do I identify a song from a TikTok video?",
-      answer: "Simply copy the TikTok video URL, paste it into our song identifier tool, and click 'Identify Song'. Our system will analyze the audio and tell you the song name, artist, and provide links to listen on Spotify and Apple Music."
-    },
-    {
-      question: "Is this song finder free to use?",
-      answer: "Yes! Our song identifier is completely free. You can identify songs from TikTok, Instagram, YouTube, and over 1000 other platforms without any cost."
-    },
-    {
-      question: "What video platforms are supported?",
-      answer: "We support over 1000 platforms including TikTok, Instagram Reels, YouTube, Vimeo, Facebook, Twitter, and many more. If it's a video URL, we can likely identify the music."
-    },
-    {
-      question: "How accurate is the song identification?",
-      answer: "Our tool uses advanced audio recognition technology with access to millions of songs. We try multiple segments of the video to ensure the best match, giving you accurate results for most popular music."
-    },
-    {
-      question: "Can I identify songs from Instagram Reels?",
-      answer: "Yes! Instagram Reels are fully supported. Just copy the Reel URL and paste it into our tool to instantly identify the background music."
-    }
-  ];
-
   return (
-    <div className="mt-12 md:mt-16 max-w-3xl mx-auto px-4">
-      <h2 className="text-2xl md:text-3xl font-bold text-center text-white mb-6 md:mb-8">
-        Frequently Asked Questions
-      </h2>
-      <div className="space-y-4 md:space-y-5">
-        {faqs.map((faq, index) => (
-          <div key={index} className="glass-card p-5 md:p-6 hover-lift">
-            <h3 className="text-base md:text-lg font-semibold text-white mb-2 md:mb-3">
-              {faq.question}
-            </h3>
-            <p className="text-sm md:text-base" style={{color: 'var(--text-secondary)'}}>
-              {faq.answer}
-            </p>
-          </div>
-        ))}
-      </div>
+    <div style={{ marginTop: '80px', maxWidth: '720px', marginInline: 'auto' }}>
+      <h2 style={{ textAlign: 'center', marginBottom: '24px' }}>FAQ</h2>
 
-      {/* SEO Footer Text */}
-      <div className="mt-10 md:mt-12 text-center text-xs md:text-sm max-w-2xl mx-auto" style={{color: 'var(--text-disabled)'}}>
-        <p className="mb-3 md:mb-4 leading-relaxed">
-          <strong className="text-white">Song Identifier Tool</strong> - The best free online tool to identify songs from any video.
-          Find music from TikTok videos, Instagram Reels, YouTube clips, and over 1000 other platforms instantly.
-          No registration required, completely free, and works on all devices.
-        </p>
-        <p className="leading-relaxed">
-          Popular searches: tiktok song finder, instagram reel music finder, youtube song identifier,
-          what song is this, identify song from video, find song name from video, music recognition tool
-        </p>
-      </div>
+      <details style={{ marginBottom: '12px' }}>
+        <summary>Is this free?</summary>
+        <p>Yes. No signup, no limits.</p>
+      </details>
+
+      <details style={{ marginBottom: '12px' }}>
+        <summary>Which platforms are supported?</summary>
+        <p>TikTok, Instagram Reels, YouTube and over 1000 more.</p>
+      </details>
+
+      <details>
+        <summary>How accurate is it?</summary>
+        <p>We analyze multiple audio segments for best match.</p>
+      </details>
     </div>
   );
 }

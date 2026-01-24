@@ -25,9 +25,15 @@
 
     .hidden { display: none; }
 
+    @keyframes ping {
+      75%, 100% {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+
     @media (max-width: 640px) {
       h1 { font-size: 2.1rem !important; }
-      .stats { grid-template-columns: 1fr !important; }
     }
   </style>
 </head>
@@ -174,8 +180,8 @@
 </div>
 <!-- End root -->
 
-<!-- Real API Integration - Temporarily disabled -->
-<!-- <script type="module" src="/src/main.tsx"></script> -->
+<!-- React App -->
+<script type="module" src="/src/main.tsx"></script>
 
 </body>
 </html>
