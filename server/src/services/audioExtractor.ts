@@ -40,9 +40,8 @@ export class AudioExtractor {
       // - equalizer: Reduce voice frequency range (200-3500Hz) by 8dB
       // - afftdn: Adaptive noise reduction to eliminate speech
       const ytDlpPath = process.env.YT_DLP_PATH || 'yt-dlp';
-      const ffmpegPath = process.env.FFMPEG_PATH || 'ffmpeg';
       const audioFilters = 'highpass=f=80,lowpass=f=16000,equalizer=f=1500:width_type=h:width=3000:g=-8,afftdn=nf=-25';
-      const command = `${ytDlpPath} --ffmpeg-location "${ffmpegPath}" -x --audio-format mp3 --postprocessor-args "ffmpeg:-ss ${startTime} -t 30 -af ${audioFilters}" -o "${outputPath}" "${this.sanitizeUrl(videoUrl)}"`;
+      const command = `${ytDlpPath} -x --audio-format mp3 --postprocessor-args "ffmpeg:-ss ${startTime} -t 30 -af ${audioFilters}" -o "${outputPath}" "${this.sanitizeUrl(videoUrl)}"`;
 
       // Execute with 5-minute timeout
       await execPromise(command, { timeout: 300000 });
