@@ -3,6 +3,10 @@ import path from 'path';
 
 dotenv.config();
 
+// Debug: Log if AUDD_API_KEY is present
+console.log('🔑 AUDD_API_KEY present:', !!process.env.AUDD_API_KEY);
+console.log('🔑 AUDD_API_KEY length:', process.env.AUDD_API_KEY?.length || 0);
+
 export const config = {
   port: parseInt(process.env.PORT || '3001', 10),
   nodeEnv: process.env.NODE_ENV || 'development',
