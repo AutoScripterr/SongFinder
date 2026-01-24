@@ -1,15 +1,14 @@
-import dotenv from 'dotenv';
 import path from 'path';
 
-dotenv.config();
-
-// Debug: Log if AUDD_API_KEY is present
+// Railway injects env vars directly, no need for dotenv
+// Debug: Log environment variables
 console.log('🔑 AUDD_API_KEY present:', !!process.env.AUDD_API_KEY);
-console.log('🔑 AUDD_API_KEY length:', process.env.AUDD_API_KEY?.length || 0);
+console.log('🔑 AUDD_API_KEY value:', process.env.AUDD_API_KEY || 'NOT SET');
+console.log('📦 All env vars:', Object.keys(process.env).filter(k => k.includes('AUDD') || k.includes('ALLOWED')));
 
 export const config = {
   port: parseInt(process.env.PORT || '3001', 10),
-  nodeEnv: process.env.NODE_ENV || 'development',
+  nodeEnv: process.env.NODE_ENV || 'production',
 
   auddApiKey: process.env.AUDD_API_KEY || '',
 
