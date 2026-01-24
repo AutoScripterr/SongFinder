@@ -10,6 +10,8 @@
         "install": {
           "cmds": [
             "pip install -U yt-dlp",
+            "rm -rf server/dist",
+            "rm -rf server/node_modules",
             "npm install"
           ]
         },
