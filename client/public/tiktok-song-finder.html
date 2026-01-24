@@ -7,7 +7,7 @@
     <meta name="description" content="Find any song from TikTok videos instantly. Free TikTok song finder tool - paste the video URL and discover the music name, artist, and where to listen.">
     <meta name="keywords" content="tiktok song finder, find tiktok song, tiktok music finder, what song is in this tiktok, tiktok song name finder">
 
-    <!-- Schema Markup -->
+    <!-- Schema Markup - HowTo -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -29,6 +29,72 @@
           "@type": "HowToStep",
           "name": "Get Song Details",
           "text": "Click identify and get the song name, artist, and streaming links instantly"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Schema Markup - FAQ for LLM & Featured Snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What if the TikTok uses original sound?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "If the TikTok creator used an original sound (their own audio), our tool will tell you it's original. However, if they used a remix or sample of a known song, we can often identify the original track by analyzing the actual audio waveform and comparing it against millions of tracks in our database."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I find sped up or slowed down songs?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Many TikTok songs are sped up or slowed down versions. Our audio recognition technology can identify both the original song and common remixes, including nightcore (sped up) and slowed+reverb versions that are extremely popular on TikTok."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can it identify songs when people are talking over the music?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Many TikToks have creators talking, doing voiceovers, or making sounds while music plays in the background. Our tool uses advanced audio filtering to reduce voice frequencies and focus on the background music, making it possible to identify songs even when there's dialogue or speech over them."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if TikTok shows 'Sound not available'?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When TikTok removes audio due to copyright, our tool can still identify it if you have the video URL before it was muted. For currently muted videos, we won't be able to extract audio to analyze."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does it work with private or friends-only TikToks?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No, the video must be publicly accessible for our tool to extract and analyze the audio. Make sure the TikTok is set to public before using our song finder."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is this different from Shazam?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Shazam requires you to play the audio and have it listen through your microphone. Our tool works directly with the TikTok URL - no need to play anything aloud. This is especially useful when you're in a quiet place, have headphones on, or the TikTok audio quality isn't great on your device speakers."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use this for TikTok songs not available in my country?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! Our tool analyzes the actual audio from the video, regardless of geographic restrictions. If you can access the TikTok video, we can identify the song, even if it's region-locked on streaming platforms."
+          }
         }
       ]
     }
