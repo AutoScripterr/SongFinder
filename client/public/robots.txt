@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://song-finder-iota.vercel.app/sitemap.xml
+Sitemap: https://whatsong.vercel.app/sitemap.xml
