@@ -1,9 +1,5 @@
-# Allow all search engines to crawl everything
 User-agent: *
 Allow: /
+Disallow: /api/
 
-# Sitemap location
 Sitemap: https://song-finder-iota.vercel.app/sitemap.xml
-
-# Crawl delay (optional - helps prevent server overload)
-Crawl-delay: 1
