@@ -2,6 +2,8 @@ import type { Request, Response } from 'express';
 import { z } from 'zod';
 import { audioExtractor } from '../services/audioExtractor.js';
 import { songRecognition } from '../services/songRecognition.js';
+import { shazamRecognition } from '../services/shazamRecognition.js';
+import { config } from '../config/index.js';
 import { audioAnalyzer } from '../services/audioAnalyzer.js';
 import { musicRecommendations } from '../services/musicRecommendations.js';
 import { cleanupService } from '../services/cleanup.js';
@@ -52,7 +54,8 @@ export class SongController {
 
           // Step 2: Try to identify song immediately (skip analysis for speed)
           console.log('Identifying song...');
-          songData = await songRecognition.identifySong(audioPath);
+          const recognizer = config.recognitionProvider === 'shazam' ? shazamRecognition : songRecognition;
+          songData = await recognizer.identifySong(audioPath);
           console.log(`Song identified: ${songData.artist} - ${songData.title}`);
 
           // Success! Break out of loop

@@ -8,6 +8,8 @@ services:
     envVars:
       - key: AUDD_API_KEY
         sync: false # se introduce manualmente en el dashboard de Render
+      - key: RAPIDAPI_KEY
+        sync: false # key de RapidAPI (Shazam) — se introduce manualmente
       - key: ALLOWED_ORIGINS
         value: https://song-finder-iota.vercel.app,https://songhunt.vercel.app
       - key: PORT

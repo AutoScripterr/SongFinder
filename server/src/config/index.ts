@@ -10,6 +10,9 @@ export const config = {
   nodeEnv: process.env.NODE_ENV || 'production',
 
   auddApiKey: process.env.AUDD_API_KEY || '',
+  rapidApiKey: process.env.RAPIDAPI_KEY || '',
+  // 'shazam' (RapidAPI) or 'audd'. Defaults to shazam when a RapidAPI key is set.
+  recognitionProvider: process.env.RECOGNITION_PROVIDER || (process.env.RAPIDAPI_KEY ? 'shazam' : 'audd'),
 
   tempAudioPath: process.env.TEMP_AUDIO_PATH || './temp',
   maxFileSizeMB: parseInt(process.env.MAX_FILE_SIZE_MB || '50', 10),
