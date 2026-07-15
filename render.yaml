@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: songfinder-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /api/health
+    envVars:
+      - key: AUDD_API_KEY
+        sync: false # se introduce manualmente en el dashboard de Render
+      - key: ALLOWED_ORIGINS
+        value: https://song-finder-iota.vercel.app,https://songhunt.vercel.app
+      - key: PORT
+        value: "3001"
