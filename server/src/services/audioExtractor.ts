@@ -84,17 +84,38 @@ export class AudioExtractor {
    * Resolve a direct CDN URL via RapidAPI and convert with ffmpeg.
    */
   private async extractViaResolver(videoUrl: string, startTime: number, outputPath: string): Promise<string> {
-    // YouTube: googlevideo links from the generic resolver are IP-locked,
-    // use the dedicated mp3 converter instead.
     const isYoutube = /(^|\.)((youtube|music\.youtube)\.com|youtu\.be)$/i
       .test(new URL(videoUrl).hostname.replace(/^www\.|^m\./, ''));
-    const directUrl = isYoutube
-      ? await mediaResolver.resolveYoutubeMp3(videoUrl)
-      : await mediaResolver.resolveDirectMediaUrl(videoUrl);
-    if (!directUrl) {
+
+    // Some resolver CDNs block cloud IPs, so collect several candidate
+    // URLs and try them in order.
+    const candidates: string[] = [];
+    if (isYoutube) {
+      const mp3 = await mediaResolver.resolveYoutubeMp3(videoUrl);
+      if (mp3) candidates.push(mp3);
+    }
+    const generic = await mediaResolver.resolveDirectMediaUrl(videoUrl);
+    if (generic) candidates.push(generic);
+
+    if (candidates.length === 0) {
       throw new Error('Could not resolve a downloadable media URL');
     }
 
+    let lastError: unknown = null;
+    for (const directUrl of candidates) {
+      try {
+        return await this.convertToMp3(directUrl, startTime, outputPath);
+      } catch (error) {
+        lastError = error;
+        console.error('Candidate URL failed, trying next:',
+          error instanceof Error ? error.message.split('\n')[0] : error);
+        await fs.unlink(outputPath).catch(() => {});
+      }
+    }
+    throw lastError instanceof Error ? lastError : new Error('All media candidates failed');
+  }
+
+  private async convertToMp3(directUrl: string, startTime: number, outputPath: string): Promise<string> {
     const ffmpegPath = process.env.FFMPEG_PATH || 'ffmpeg';
     // Browser-like UA: some CDNs reject default ffmpeg user agents
     await execFilePromise(ffmpegPath, [
