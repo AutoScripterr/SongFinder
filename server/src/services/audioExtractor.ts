@@ -84,7 +84,13 @@ export class AudioExtractor {
    * Resolve a direct CDN URL via RapidAPI and convert with ffmpeg.
    */
   private async extractViaResolver(videoUrl: string, startTime: number, outputPath: string): Promise<string> {
-    const directUrl = await mediaResolver.resolveDirectMediaUrl(videoUrl);
+    // YouTube: googlevideo links from the generic resolver are IP-locked,
+    // use the dedicated mp3 converter instead.
+    const isYoutube = /(^|\.)((youtube|music\.youtube)\.com|youtu\.be)$/i
+      .test(new URL(videoUrl).hostname.replace(/^www\.|^m\./, ''));
+    const directUrl = isYoutube
+      ? await mediaResolver.resolveYoutubeMp3(videoUrl)
+      : await mediaResolver.resolveDirectMediaUrl(videoUrl);
     if (!directUrl) {
       throw new Error('Could not resolve a downloadable media URL');
     }

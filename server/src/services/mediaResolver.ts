@@ -24,9 +24,67 @@ interface AutolinkResponse {
  */
 export class MediaResolverService {
   private readonly apiHost = 'social-download-all-in-one.p.rapidapi.com';
+  private readonly ytMp3Host = 'youtube-mp36.p.rapidapi.com';
 
   isConfigured(): boolean {
     return !!config.rapidApiKey;
+  }
+
+  /**
+   * YouTube-specific resolver: the youtube-mp36 API serves the mp3 from
+   * its own CDN, so the link is downloadable from any IP (googlevideo
+   * URLs from autolink are IP-locked and useless from a datacenter).
+   * Returns null if the video can't be converted or on quota/auth errors
+   * (caller falls back to other strategies).
+   */
+  async resolveYoutubeMp3(videoUrl: string): Promise<string | null> {
+    if (!this.isConfigured()) return null;
+    const videoId = this.extractYoutubeId(videoUrl);
+    if (!videoId) return null;
+
+    // Conversion is async on their side: poll while status is 'processing'
+    for (let attempt = 1; attempt <= 5; attempt++) {
+      try {
+        const response = await axios.get(`https://${this.ytMp3Host}/dl`, {
+          params: { id: videoId },
+          headers: {
+            'x-rapidapi-host': this.ytMp3Host,
+            'x-rapidapi-key': config.rapidApiKey,
+          },
+          timeout: 30000,
+        });
+        const { status, link } = response.data || {};
+        if (status === 'ok' && link) return link;
+        if (status !== 'processing') {
+          console.log(`youtube-mp36: status=${status} for ${videoId}`);
+          return null;
+        }
+      } catch (error) {
+        const status = axios.isAxiosError(error) ? error.response?.status : undefined;
+        console.error(`youtube-mp36 failed (status ${status ?? 'n/a'}):`,
+          error instanceof Error ? error.message : error);
+        return null;
+      }
+      await new Promise(r => setTimeout(r, 3000));
+    }
+    return null;
+  }
+
+  private extractYoutubeId(videoUrl: string): string | null {
+    try {
+      const u = new URL(videoUrl);
+      const host = u.hostname.replace(/^www\.|^m\./, '');
+      if (host === 'youtu.be') return u.pathname.slice(1).split('/')[0] || null;
+      if (host === 'youtube.com' || host === 'music.youtube.com') {
+        const v = u.searchParams.get('v');
+        if (v) return v;
+        const m = u.pathname.match(/^\/(shorts|embed|live)\/([\w-]{5,})/);
+        if (m?.[2]) return m[2];
+      }
+      return null;
+    } catch {
+      return null;
+    }
   }
 
   /**
